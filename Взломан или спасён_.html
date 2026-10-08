@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Взломан или спасён?</title>
+<meta name="description" content="Игра о защите личных данных: 10 жизненных ситуаций с разбором ошибок">
+<meta name="theme-color" content="#7c3aed">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛡️%3C/text%3E%3C/svg%3E">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--ink:#1d1b3a;--mut:#5f5d7e;--card:#fffffff0;--line:#e2defa;--acc:#7c3aed;--ok:#12805c;--okbg:#d9f7e8;--bad:#c2261c;--badbg:#ffe2de;--warnbg:#fff1c9;--g1:#e9e3ff;--g2:#d4ecff;--g3:#ffe3f0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#f1efff;--mut:#b4b0d8;--card:#241f4af0;--line:#3b3470;--ok:#5fe0a8;--okbg:#14403a;--bad:#ff8f86;--badbg:#4a2330;--warnbg:#463a1a;--g1:#1a1538;--g2:#10223f;--g3:#2a1536}}
+:root[data-theme="dark"]{--ink:#f1efff;--mut:#b4b0d8;--card:#241f4af0;--line:#3b3470;--ok:#5fe0a8;--okbg:#14403a;--bad:#ff8f86;--badbg:#4a2330;--warnbg:#463a1a;--g1:#1a1538;--g2:#10223f;--g3:#2a1536}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font:17px/1.5 "Trebuchet MS",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--g1) linear-gradient(135deg,var(--g1),var(--g2) 50%,var(--g3)) fixed}
+main{max-width:640px;margin:0 auto;padding:22px 16px 48px}
+h1{font-size:38px;line-height:1.1;margin:10px 0;font-weight:800;background:linear-gradient(90deg,#7c3aed,#db2777,#ea580c);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:21px;line-height:1.3;margin:0 0 18px}
+p{margin:0 0 14px}
+.hero{text-align:center;padding-top:6vh}
+.shield{font-size:92px;line-height:1;filter:drop-shadow(0 10px 18px rgba(124,58,237,.35));animation:float 3s ease-in-out infinite}
+.sub{color:var(--mut);font-size:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0 28px}
+.chips span{padding:7px 14px;border-radius:99px;background:var(--card);border:1.5px solid var(--line);font-weight:700;font-size:15px}
+.chips span:nth-child(1){border-color:#7c3aed}.chips span:nth-child(2){border-color:#ea580c}.chips span:nth-child(3){border-color:#0891b2}
+.meta{display:flex;justify-content:space-between;align-items:center;font-weight:700;color:var(--mut);font-size:15px}
+.pill{background:var(--acc);color:#fff;padding:4px 14px;border-radius:99px}
+.dots{display:flex;gap:6px;margin:12px 0 18px}
+.dots span{flex:1;height:8px;border-radius:4px;background:var(--line);transition:background .25s}
+.dots .c{background:var(--acc);opacity:.5}.dots .y{background:#16a36f}.dots .n{background:#e5483d}
+.card{background:var(--card);border:1px solid var(--line);border-top:7px solid var(--acc);border-radius:18px;padding:22px 20px;box-shadow:0 14px 34px -14px var(--acc)}
+.ico{width:64px;height:64px;display:grid;place-items:center;font-size:34px;border-radius:18px;margin:-46px 0 14px;background:var(--acc);box-shadow:0 8px 18px -6px var(--acc)}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin:0 0 10px;padding:12px 14px;font:inherit;font-size:16px;line-height:1.35;color:var(--ink);background:transparent;border:2px solid var(--line);border-radius:14px;cursor:pointer;transition:transform .12s,border-color .12s}
+.opt::before{content:attr(data-l);flex:none;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:var(--line);font-weight:800;font-size:14px}
+.opt:hover:not(:disabled){border-color:var(--acc);transform:translateX(3px)}
+.opt:disabled{cursor:default;opacity:.7}
+.opt.ok{border-color:#16a36f;background:var(--okbg);opacity:1}.opt.ok::before{content:"✓";background:#16a36f;color:#fff}
+.opt.no{border-color:#e5483d;background:var(--badbg);opacity:1}.opt.no::before{content:"✕";background:#e5483d;color:#fff}
+.fb{margin:6px 0 12px;padding:12px 14px;border-radius:12px;font-size:16px;border-left:6px solid}
+.fb.ok{background:var(--okbg);border-color:#16a36f}.fb.no{background:var(--badbg);border-color:#e5483d}.fb.warn{background:var(--warnbg);border-color:#e0a100}
+.btn{padding:13px 26px;font:inherit;font-size:17px;font-weight:800;color:#fff;background:linear-gradient(90deg,var(--acc),#db2777);border:0;border-radius:99px;cursor:pointer;box-shadow:0 8px 20px -8px var(--acc)}
+.btn.big{padding:16px 40px;font-size:19px}
+.btn:active{transform:scale(.97)}
+button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.end{text-align:center}
+.ring{--p:0;width:160px;height:160px;border-radius:50%;margin:6px auto 16px;display:grid;place-items:center;background:conic-gradient(var(--acc) calc(var(--p)*1%),var(--line) 0)}
+.ring b{width:126px;height:126px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:34px}
+.ring small{display:block;font-size:14px;color:var(--mut);font-weight:400;text-align:center}
+.rank{font-size:26px;font-weight:800;margin-bottom:6px}
+ul{text-align:left;padding-left:20px;margin:0 0 16px}li{margin-bottom:6px}
+.tip{color:var(--mut);font-size:15px}
+.pop{animation:pop .35s}.shake{animation:shake .4s}
+.cf{position:fixed;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall 3.2s linear forwards;pointer-events:none}
+@keyframes float{50%{transform:translateY(-12px)}}
+@keyframes pop{40%{transform:scale(1.02)}}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@property --p{syntax:"<number>";inherits:false;initial-value:0}
+body{background:var(--g1)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,var(--g1),var(--g2) 50%,var(--g3))}
+.view{animation:in .4s both}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.ring{transition:--p 1.2s cubic-bezier(.2,.8,.2,1)}
+.shield{will-change:transform}
+.card{backdrop-filter:blur(8px)}
+.opt{min-height:48px}
+.btn{transition:transform .15s,filter .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 12px 26px -8px var(--acc)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line);box-shadow:none}
+.row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.best{color:var(--mut);font-size:15px;margin:-12px 0 20px}
+.keys{color:var(--mut);font-size:13px;text-align:center;margin:14px 0 0}
+@media (hover:none){.keys{display:none}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+// [вопрос, варианты, верный индекс, объяснение верного, объяснения неверных (по индексу)]
+const Q=[
+["📧 Пришло письмо от «банка»: «Карта заблокирована! Перейдите по ссылке и введите данные». Что делаешь?",
+["Перехожу по ссылке и ввожу данные карты","Звоню в банк по номеру на обратной стороне карты","Отвечаю на письмо и спрашиваю, настоящее ли оно","Игнорирую и удаляю письмо"],1,
+"Банки не просят данные по ссылке из письма. Звонок по официальному номеру — самая надёжная проверка.",
+["Ты ввёл данные на фишинговом сайте — деньги списаны за считаные минуты.",0,"Ответ подтверждает, что адрес активен, и атаки продолжатся.","Безопасно, но не решает вопрос: вдруг блокировка настоящая? Лучше перезвонить."]],
+["📱 Незнакомец в соцсети: «Я из поддержки. Назови код из СМС для подтверждения аккаунта». Что делать?",
+["Назвать код — раз просят","Спросить имя и должность, потом назвать код","Никогда никому не сообщать коды из СМС","Отправить скриншот СМС без самого кода"],2,
+"Код из СМС — ключ к аккаунту. Его нельзя сообщать никому, даже «сотрудникам банка».",
+["Аккаунт угнан: код работает как пароль.","Мошенник назовёт любое имя. Код — тайна для всех.",0,"Скриншот тоже раскрывает, какая услуга подключается. Просто не отвечай."]],
+["💻 Ты скачал игру с торрента. Через день пропали деньги с карты. Почему?",
+["Совпадение — карта «сгорела»","В игре был вирус-стилер, укравший данные карты","Банк сам списал деньги за подписку","Торренты безопасны, дело в другом"],1,
+"В пиратских сборках часто прячут стилеры — программы, ворующие пароли и данные карт.",
+["Нет, вирус уже отправил данные мошенникам.",0,"Банк не списывает деньги без причины. Скорее всего, виноват вирус.","Опасное заблуждение: торренты — один из главных источников заражения."]],
+["🔑 Придумываешь пароль для почты. Какой выбрать?",
+["qwerty123 — легко запомнить","Дата рождения и имя собаки","Длинная фраза: «Кот_Съел_Сосиску_2024!»","Один сложный пароль для всех сайтов"],2,
+"Длинные фразы с символами подобрать сложно, а запомнить легко.",
+["Такой пароль подбирается за секунду.","Эти данные легко найти в соцсетях.",0,"Если пароль утечёт с одного сайта, взломают все аккаунты."]],
+["📶 Ты в кафе, нужен интернет. Какой Wi-Fi выбрать?",
+["Открытый «Free_WiFi_Cafe» без пароля","Сеть с похожим названием и паролем от администратора","Любой — лишь бы быстрее","Раздать интернет с телефона или включить VPN"],3,
+"Открытые сети легко прослушать. Мобильный интернет или VPN безопаснее.",
+["Через открытую сеть могут перехватить пароли и переписку.","Мошенники создают фейковые точки с похожими названиями. Уточняй название у персонала.","Скорость не главное: в открытой сети тебя могут «слушать».",0]],
+["📸 Публикуешь фото с отдыха. Что лучше не выкладывать?",
+["Фото еды и пейзажи","Билеты с QR-кодами, посадочные талоны, документы","Фото с друзьями (с их разрешения)","Селфи на фоне моря"],1,
+"По QR-коду билета можно узнать твои данные, а по документам — украсть личность.",
+["Еда и пейзажи безопасны, если не видна геолокация.",0,"Разрешение друзей важно, но это не самый опасный пункт.","Селфи безопасно, если на фоне нет адреса и документов."]],
+["🎁 В игре пишут: «Ты выиграл 10 000 ₽! Введи данные карты для получения». Реакция?",
+["Ввести данные — это же подарок","Ввести только номер карты, без CVV","Это развод: удалить и заблокировать отправителя","Попросить перевести на телефон, а не на карту"],2,
+"Бесплатный сыр бывает только в мышеловке. Никаких данных карты за «приз».",
+["Карта будет опустошена за пару минут.","Номера карты достаточно для некоторых схем мошенничества.",0,"Мошенники придумают новую схему. Лучше сразу заблокировать."]],
+["🔗 Друг в мессенджере прислал ссылку: «Смотри, это ты на видео?» Что делать?",
+["Сразу открыть — вдруг важное","Позвонить другу и спросить, что это","Переслать другим друзьям","Открыть с чужого телефона"],1,
+"Аккаунт друга могли взломать. Позвони и уточни.",
+["Ссылка вела на фишинговый сайт — аккаунт угнан.",0,"Ты распространил вирус среди друзей.","Так опасность переходит на чужое устройство."]],
+["🔒 Как проверить, не утекли ли твои данные?",
+["Никак, это невозможно узнать","Проверить email на haveibeenpwned.com","Спросить друзей, не взламывали ли их","Сменить пароль и забыть"],1,
+"Сервис haveibeenpwned.com покажет, в каких утечках засветился твой email.",
+["Возможно: есть специальные сервисы проверки утечек.",0,"Друзья не помогут — нужен поиск по базам утечек.","Смена пароля хороша, но сначала стоит узнать, что именно утекло."]],
+["🛡️ Что такое двухфакторная аутентификация (2FA)?",
+["Два пароля для одного аккаунта","Вход по паролю плюс код из СМС или приложения","Два аккаунта на одном сайте","Смена пароля раз в два дня"],1,
+"2FA — дополнительный уровень защиты: даже с украденным паролем без кода не войти.",
+["Не совсем: нужен второй независимый фактор, а не второй пароль.",0,"Два аккаунта — не защита, а путаница.","Слишком часто: неудобно и не защищает."]]
+];
+const COL=["#7c3aed","#2563eb","#0891b2","#db2777","#ea580c"];
+const N=Q.length, app=document.getElementById("app");
+let i=0, score=0, hist=[], D=Q;
+const shuf=a=>{for(let n=a.length-1;n>0;n--){const m=Math.random()*(n+1)|0;[a[n],a[m]]=[a[m],a[n]]}return a};
+const deal=()=>shuf(Q.map(([q,o,r,g,b])=>{const p=shuf(o.map((_,k)=>k));return [q,p.map(k=>o[k]),p.indexOf(r),g,p.map(k=>b[k])]}));
+const store={get:()=>{try{return +localStorage.getItem("ks-best")||0}catch(e){return 0}},set:v=>{try{localStorage.setItem("ks-best",v)}catch(e){}}};
+const view=h=>{app.innerHTML=h;app.classList.remove("view");void app.offsetWidth;app.classList.add("view")};
+const esc=s=>s.replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+const setAcc=c=>document.documentElement.style.setProperty("--acc",c);
+const dots=()=>`<div class="dots">${D.map((_,n)=>`<span class="${n<hist.length?(hist[n]?"y":"n"):n===i?"c":""}"></span>`).join("")}</div>`;
+
+function start(){
+  i=0;score=0;hist=[];D=deal();setAcc(COL[0]);
+  view(`<div class="hero"><div class="shield">🛡️</div><h1>Взломан или спасён?</h1>
+  <p class="sub">Как защитить личные данные в интернете</p>
+  <div class="chips"><span>🎯 ${N} ситуаций</span><span>⭐ ${N*10} баллов</span><span>🏅 3 звания</span></div>${store.get()?`<p class="best">🏆 Твой рекорд: ${store.get()} из ${N*10}</p>`:""}
+  <button class="btn big" id="go">Начать игру</button></div>`);
+  document.getElementById("go").onclick=show;
+}
+
+function show(){
+  setAcc(COL[i%COL.length]);
+  const [q,opts]=D[i], sp=q.indexOf(" ");
+  view(`<div class="meta"><span>Ситуация ${i+1} из ${N}</span><span class="pill">⭐ ${score}</span></div>${dots()}
+  <div class="card"><div class="ico">${q.slice(0,sp)}</div><h2>${esc(q.slice(sp+1))}</h2><div id="opts"></div><div id="res" aria-live="polite"></div><p class="keys">Клавиши 1–4 — выбор ответа, Enter — дальше</p></div>`);
+  const box=document.getElementById("opts");
+  opts.forEach((t,k)=>{
+    const b=document.createElement("button");
+    b.className="opt";b.dataset.l="АБВГ"[k];b.textContent=t;b.onclick=()=>answer(k);
+    box.appendChild(b);
+  });
+}
+
+function answer(k){
+  const [q,opts,right,good,bad]=D[i];
+  document.querySelectorAll(".opt").forEach((b,n)=>{b.disabled=true;if(n===right)b.classList.add("ok");else if(n===k)b.classList.add("no")});
+  const okAns=k===right;
+  hist.push(okAns);
+  let html;
+  if(okAns){score+=10;html=`<div class="fb ok"><b>+10 баллов!</b> ${esc(good)}</div>`}
+  else{
+    const mild=/^(Безопасно|Возможно|Скриншот|Еда|Разрешение|Селфи|Не совсем|Смена)/.test(bad[k]);
+    html=`<div class="fb ${mild?"warn":"no"}"><b>Неверно.</b> ${esc(bad[k])}</div>
+    <div class="fb ok"><b>Правильный ответ:</b> ${esc(opts[right])}. ${esc(good)}</div>`}
+  html+=`<button class="btn" id="next">${i===N-1?"Узнать результат":"Дальше"}</button>`;
+  document.getElementById("res").innerHTML=html;
+  document.querySelector(".dots").outerHTML=dots();
+  document.querySelector(".pill").textContent="⭐ "+score;
+  document.querySelector(".card").classList.add(okAns?"pop":"shake");
+  const nx=document.getElementById("next");
+  nx.focus();nx.onclick=()=>{++i<N?show():finish()};
+}
+
+function confetti(){
+  for(let n=0;n<44;n++){
+    const s=document.createElement("span");s.className="cf";
+    s.style.cssText=`left:${Math.random()*100}vw;background:${COL[n%5]};animation-delay:${Math.random()*1.2}s;transform:rotate(${Math.random()*90}deg)`;
+    document.body.appendChild(s);setTimeout(()=>s.remove(),5000);
+  }
+}
+
+function finish(){
+  const p=Math.round(score/(N*10)*100);
+  const [rank,msg,col]=p>=90?["🏆 Кибер-защитник","Ты отлично разбираешься в кибербезопасности и можешь учить других.","#16a36f"]
+    :p>=50?["🕶️ Хакер-любитель","Неплохо, но часть схем мошенников ещё может тебя обмануть. Будь внимательнее.","#ea580c"]
+    :["🐣 Новичок","Ты пока легко попадаешься на уловки. Пройди игру ещё раз и запомни правильные ответы.","#db2777"];
+  setAcc(col);const rec=score>store.get()&&score>0;if(rec)store.set(score);
+  const wrong=hist.map((ok,n)=>ok?-1:n).filter(n=>n>=0);
+  const list=wrong.length?`<p><b>Что стоит повторить:</b></p><ul>${wrong.map(n=>`<li>Ситуация ${n+1}: ${esc(D[n][0].slice(0,70))}…</li>`).join("")}</ul>`:"";
+  view(`${dots().replace(/ c"/g,'"')}<div class="card end"><div class="ring" style="--p:0"><b>${score}<small>из ${N*10}</small></b></div>
+  ${rec?`<p class="pill" style="display:inline-block">🎉 Новый рекорд!</p>`:""}<div class="rank">${rank}</div><p>${msg}</p>
+  <p class="tip">Правильных ответов: ${N-wrong.length} из ${N}</p>${list}
+  <p>🔐 Главное: пароли — только сложные, коды из СМС — никому, ссылки от незнакомцев — не открывать.</p>
+  <div class="row"><button class="btn" id="again">Сыграть ещё раз</button><button class="btn ghost" id="share">Поделиться</button></div></div>`);
+  document.getElementById("again").onclick=start;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelector(".ring").style.setProperty("--p",p)));
+  document.getElementById("share").onclick=async e=>{const t=`Я набрал ${score} из ${N*10} в игре «Взломан или спасён?» — ${rank.replace(/^\S+ /,"")}. Попробуй и ты!`;
+    try{if(navigator.share)await navigator.share({text:t,url:location.href});else{await navigator.clipboard.writeText(t+" "+location.href);e.target.textContent="Скопировано ✓"}}catch(_){}};
+  if(p>=50)confetti();
+}
+addEventListener("keydown",e=>{const o=[...document.querySelectorAll(".opt")],b=o[+e.key-1];
+  if(b&&e.key.length===1&&!b.disabled)b.click();
+  else if(e.key==="Enter"){const x=document.getElementById("next")||document.getElementById("go")||document.getElementById("again");if(x&&document.activeElement!==x)x.click()}});
+start();
+</script>
+</body>
+</html>
