@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Байкал: глубокое озеро, большая история</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8f3f6;--fg:#082533;--mut:#406070;--card:#fff;--bd:#bcd6de;--ac:#0b7f9e;--am:#e8912d;--hero:#041a26;--herof:#eaf9ff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#07151d;--fg:#e3f1f6;--mut:#92b0bd;--card:#0f2430;--bd:#1d3a49;--ac:#4fc3e0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#07151d;--fg:#e3f1f6;--mut:#92b0bd;--card:#0f2430;--bd:#1d3a49;--ac:#4fc3e0;color-scheme:dark}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.65 "PT Sans",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:4px;align-items:center;padding:8px 14px;background:var(--bg);border-bottom:1px solid var(--bd);overflow-x:auto}
+nav a,nav button{flex:none;color:var(--fg);text-decoration:none;font:700 15px "PT Sans",sans-serif;padding:6px 12px;border-radius:8px;border:1px solid transparent;background:none;cursor:pointer}
+nav a:hover,nav button:hover{border-color:var(--ac)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+nav button{margin-left:auto}
+.hero{position:relative;background:linear-gradient(var(--hero),#0a3a52);color:var(--herof);min-height:80vh;display:flex;align-items:flex-end;padding:40px 20px 70px;overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero div{position:relative;max-width:900px;margin:0 auto;width:100%}
+h1,h2,h3{font-family:Philosopher,Georgia,serif;line-height:1.1;margin:0 0 .45em}
+h1{font-size:clamp(56px,16vw,150px);font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(28px,6vw,44px)}
+h3{font-size:22px;margin-bottom:.2em}
+.hero p{font-size:20px;max-width:34ch;opacity:.9;margin:0}
+.wrap{max-width:880px;margin:0 auto;padding:60px 18px 6px}
+.lead{color:var(--mut);max-width:62ch}
+dl{display:grid;grid-template-columns:minmax(120px,200px) 1fr;gap:0;margin:20px 0;border-top:1px solid var(--bd)}
+dt,dd{margin:0;padding:12px 0;border-bottom:1px solid var(--bd)}
+dt{font:700 22px Philosopher,serif;color:var(--ac)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.chip,.tab{font:700 15px "PT Sans",sans-serif;padding:7px 16px;border-radius:99px;border:1px solid var(--bd);background:var(--card);color:var(--fg);cursor:pointer}
+.chip[aria-pressed=true],.tab[aria-selected=true]{background:var(--ac);color:#fff;border-color:var(--ac)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:6px 22px 6px 22px;padding:18px}
+.card small{color:var(--am);font-weight:700}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:22px;margin:16px 0}
+details{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 18px;margin:16px 0}
+summary{cursor:pointer;font:700 22px Philosopher,serif}
+input[type=range]{width:100%;accent-color:var(--ac)}
+.big{font:700 clamp(30px,8vw,52px) Philosopher,serif;color:var(--ac);margin:4px 0}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);font:inherit;cursor:pointer}
+.ok{background:#1f9d55;color:#fff;border-color:#1f9d55}.no{background:#c93c3c;color:#fff;border-color:#c93c3c}
+label.st{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bd);cursor:pointer}
+label.st input{width:22px;height:22px;margin-top:3px;accent-color:var(--ac);flex:none}
+.pb{height:10px;border-radius:5px;background:var(--bd);overflow:hidden;margin-top:14px}.pb i{display:block;height:100%;width:0;background:var(--am);transition:width .3s}
+.sr{width:100%;font:inherit;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--fg);margin:14px 0}
+.tlh{border-left:3px solid var(--am);margin:20px 0 0 6px;padding-left:20px}.tlh p{margin:0 0 20px}.tlh b{font:700 22px Philosopher,serif;color:var(--am)}
+.gi{padding:12px 0;border-bottom:1px solid var(--bd)}.gi b{font:700 20px Philosopher,serif;color:var(--ac)}
+.ar{display:inline-block;font-size:44px;line-height:1;color:var(--am);transition:transform .5s}
+.map{width:100%;height:auto;display:block;max-width:420px;margin:0 auto}
+.lake{fill:var(--ac);fill-opacity:.3;stroke:var(--ac);stroke-width:2}
+.pt{fill:var(--am);stroke:var(--card);stroke-width:2;cursor:pointer}g:focus-visible .pt,g:hover .pt{fill:var(--fg)}
+.cmp{display:grid;grid-template-columns:100px 1fr 110px;gap:10px;align-items:center;margin:8px 0;font-size:15px}.cmp i{display:block;height:16px;border-radius:8px;background:var(--bd);transition:width .4s}.cmp.me i{background:var(--ac)}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}.mc{aspect-ratio:1;font-size:34px;border-radius:14px;border:1px solid var(--bd);background:var(--card);color:var(--fg);cursor:pointer}.mc.f{background:var(--ac)}
+textarea.sr{min-height:140px;resize:vertical}
+footer{text-align:center;color:var(--mut);padding:56px 18px 30px;font-size:15px}
+@media(max-width:560px){dl{grid-template-columns:1fr}dt{border:0;padding-bottom:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav><a href="#cifry">Цифры</a><a href="#zhivye">Обитатели</a><a href="#sezony">Сезоны</a><a href="#legenda">Легенда</a><a href="#vetry">Ветры</a><a href="#istoriya">История</a><a href="#slovar">Словарь</a><a href="#ryukzak">Рюкзак</a><a href="#voda">Вода</a><a href="#karta">Карта</a><a href="#ozera">Озёра</a><a href="#led">Лёд</a><a href="#quiz">Викторина</a><a href="#marshrut">Маршрут</a><a href="#igra">Игра</a><a href="#zametki">Заметки</a><button id="th">Тема</button></nav>
+
+<header class="hero"><canvas id="cv"></canvas><div>
+<h1>Байкал</h1>
+<p>Самое глубокое озеро планеты. Здесь лёд прозрачнее стекла, а нерпа живёт вдали от океана.</p><button class="chip" id="rf" style="margin-top:18px">Случайный факт</button><p id="rt" style="margin-top:12px;font-size:18px"></p>
+</div></header>
+
+<section class="wrap" id="cifry">
+<h2>Озеро в цифрах</h2>
+<p class="lead">Байкал называют морем, и это не преувеличение: размеры у него вполне морские.</p>
+<dl id="dl"></dl>
+</section>
+
+<section class="wrap" id="zhivye">
+<h2>Кто живёт в Байкале и вокруг него</h2>
+<p class="lead">Больше половины видов животных озера нигде больше на Земле не встречаются. Выберите группу.</p>
+<div class="chips" id="ch"></div>
+<div class="cards" id="cd"></div>
+</section>
+
+<section class="wrap" id="sezony">
+<h2>Четыре разных озера за год</h2>
+<div class="chips" id="tb" role="tablist"></div>
+<div class="box" id="tp"></div>
+</section>
+
+<section class="wrap" id="legenda">
+<h2>Старик Байкал и его дочь</h2>
+<details><summary>Прочитать легенду</summary>
+<p>У могучего Байкала было 336 сыновей-рек и одна дочь, красавица Ангара. Отец берёг её и прочил в жёны богатыря Иркута. Но Ангара услышала о юном Енисее и ночью убежала к нему, прорвавшись сквозь горы.</p>
+<p>Разгневанный Байкал швырнул ей вслед огромную скалу. Она упала у самого истока Ангары и стоит там до сих пор. Это Шаманский камень, и местные до сих пор считают его хранителем озера.</p></details>
+<details><summary>Что в легенде правда</summary>
+<p>Рек, впадающих в Байкал, действительно 336, а вытекает из озера единственная Ангара, которая потом впадает в Енисей. Шаманский камень существует: он торчит из воды в истоке Ангары.</p></details>
+</section>
+
+<section class="wrap" id="vetry"><h2>Ветры Байкала</h2><p class="lead">У каждого ветра на озере своё имя и характер. Их знают все рыбаки и яхтсмены.</p><div class="chips" id="wn"></div><div class="box" id="wp"></div></section>
+<section class="wrap" id="istoriya"><h2>Как человек открывал Байкал</h2><div class="tlh" id="hs"></div></section>
+<section class="wrap" id="slovar"><h2>Словарь путешественника</h2><input class="sr" id="gq" type="search" placeholder="Найти слово, например: лёд" aria-label="Поиск по словарю"><div id="gl"></div></section>
+<section class="wrap" id="ryukzak"><h2>Что взять с собой</h2><p class="lead">Выберите сезон и отмечайте собранные вещи.</p><div class="chips" id="kt"></div><div class="box" id="kl"></div><div class="pb"><i id="kp"></i></div></section>
+<section class="wrap" id="voda">
+<h2>Сколько воды приходится на вас</h2>
+<p class="lead">В Байкале около 23 600 кубических километров воды. Если разделить её на всех людей Земли, выйдет примерно 2,9 миллиона литров на человека.</p>
+<div class="box">Ваш расход воды в день: <b id="lv"></b> л
+<input id="rg" type="range" min="10" max="600" step="10" value="150">
+<p style="margin:12px 0 0">Своей доли Байкала вам хватило бы на</p><p class="big" id="yr"></p><p style="margin:0" id="cm"></p></div>
+</section>
+
+<section class="wrap" id="karta"><h2>Схема озера</h2><p class="lead">Нажимайте на точки, чтобы узнать, что там интересного. Схема примерная, масштаб условный.</p><div class="box"><svg class="map" viewBox="0 0 360 430" role="img" aria-label="Схема Байкала"><path class="lake" stroke-linejoin="round" d="M39 380L74 308L114 228L154 158L194 88L234 28Q252 22 266 52L226 112L186 182L146 252L106 332L71 404Q50 410 39 380Z"/><g id="pts"></g></svg><div id="pi" style="margin-top:10px"></div></div></section>
+<section class="wrap" id="ozera"><h2>Байкал рядом с другими озёрами</h2><p class="lead">По глубине и объёму воды Байкал первый в мире, а вот по площади его опережают Верхнее озеро и Танганьика.</p><div class="chips" id="oc"></div><div class="box" id="ob"></div></section>
+<section class="wrap" id="led"><h2>Сколько выдержит байкальский лёд</h2><p class="lead">Это общие ориентиры, а не гарантия. Перед выходом на лёд всегда спрашивайте местных и службы спасения.</p><div class="box">Толщина льда: <b id="iv"></b> см<input id="ir" type="range" min="0" max="60" value="15"><p class="big" style="font-size:24px" id="ij"></p></div></section>
+<section class="wrap" id="quiz"><h2>Проверьте себя</h2><div class="box" id="qb"></div></section>
+
+<section class="wrap" id="marshrut">
+<h2>Маршрут на неделю</h2>
+<p class="lead">Отмечайте остановки, которые вам хочется увидеть.</p>
+<div class="box" id="st"></div><div class="pb"><i id="pg"></i></div>
+</section>
+
+<section class="wrap" id="igra"><h2>Найди пары</h2><p class="lead">Откройте две одинаковые карточки. Чем меньше ходов, тем лучше.</p><div class="mem" id="mg"></div><p id="mv" style="margin:0 0 10px"></p><button class="chip" id="mn">Новая игра</button></section>
+<section class="wrap" id="zametki"><h2>Заметки о вашей поездке</h2><p class="lead">Записывайте планы и впечатления. Текст сохраняется в этом браузере.</p><textarea class="sr" id="nt" placeholder="Что хочется увидеть, кого взять с собой, что не забыть…" aria-label="Заметки"></textarea></section>
+<footer>Байкал включён в список Всемирного наследия ЮНЕСКО с 1996 года. Берегите его.</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+$('#th').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark'};
+
+/* волны */
+const cv=$('#cv'),g=cv.getContext('2d');let W,H,t=0;
+function rs(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight}
+function wv(){g.clearRect(0,0,W,H);[['#4fc3e0',.18,.9,40],['#0b7f9e',.3,1.4,55],['#e8f3f6',.12,2,28]].forEach((w,k)=>{g.beginPath();g.moveTo(0,H);for(let x=0;x<=W;x+=8)g.lineTo(x,H*(.66+k*.08)+Math.sin(x/(110+k*40)+t*w[2])*w[3]);g.lineTo(W,H);g.fillStyle=w[0];g.globalAlpha=w[1];g.fill()});g.globalAlpha=1;t+=.012;
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(wv)}
+rs();wv();addEventListener('resize',rs);
+
+/* цифры */
+const F=[['1642 м','Максимальная глубина. Это рекорд среди всех озёр мира.'],['636 км','Длина озера по берегу почти как от Москвы до Санкт-Петербурга по прямой.'],['25–30 млн лет','Возраст: Байкал старейшее озеро Земли.'],['20%','Доля мировых запасов неледниковой пресной воды.'],['336','Постоянных рек и ручьёв впадает в озеро, а вытекает одна.'],['до 40 м','Прозрачность воды видно предметы на глубине десятков метров.'],['27','Островов, крупнейший из них Ольхон длиной около 70 км.']];
+$('#dl').innerHTML=F.map(f=>`<dt>${f[0]}</dt><dd>${f[1]}</dd>`).join('');
+
+/* обитатели */
+const A=[['Нерпа','звери','Единственный в мире тюлень, живущий только в пресной воде. Детёныши рождаются в снежных логовах на льду.'],
+['Бурый медведь','звери','Обитает в тайге Прибайкалья, особенно в Баргузинском заповеднике, где водится и знаменитый баргузинский соболь.'],
+['Омуль','рыбы','Главная промысловая рыба Байкала. Осенью идёт на нерест в реки, в первую очередь в Селенгу.'],
+['Голомянка','рыбы','Живородящая прозрачная рыбка. Почти треть её тела составляет жир, а живёт она на глубине до километра.'],
+['Байкальский осётр','рыбы','Крупная древняя рыба, вырастающая до двух метров. Сейчас редка и охраняется.'],
+['Эпишура','мелкие','Рачок размером с рисовое зёрнышко. Миллиарды эпишур фильтруют воду и делают её такой чистой.'],
+['Баргузинский соболь','звери','Тёмный зверёк с шелковистым мехом. Именно ради его спасения создавали Баргузинский заповедник.'],['Хариус','рыбы','Любит холодные чистые реки, впадающие в озеро, и считается любимой добычей рыбаков.'],['Орлан-белохвост','птицы','Крупный хищник, гнездится на побережье и ловит рыбу прямо из воды.'],['Бокоплавы','мелкие','Рачки, которых в Байкале сотни видов. Они живут от мелководья до самого дна и чистят его.'],['Байкальские губки','мелкие','Зелёные подводные «деревья». Они тоже помогают очищать воду, а болезнь губок учёные считают тревожным сигналом.']];
+let cf='все';
+function rc(){$('#ch').innerHTML=['все','звери','птицы','рыбы','мелкие'].map(c=>`<button class="chip" aria-pressed="${c===cf}" data-c="${c}">${c}</button>`).join('');
+$('#cd').innerHTML=A.filter(a=>cf==='все'||a[1]===cf).map(a=>`<div class="card"><small>${a[1]}</small><h3>${a[0]}</h3><p style="margin:0">${a[2]}</p></div>`).join('')}
+$('#ch').onclick=e=>{const b=e.target.closest('.chip');if(b){cf=b.dataset.c;rc()}};rc();
+
+/* сезоны */
+const Z=[['Зима','Лёд толщиной до метра и больше держит даже грузовики. Он прозрачный, и видно трещины, уходящие вглубь. Лучшее время для коньков, ледяных гротов у Ольхона и поездок на собачьих упряжках.'],
+['Весна','В мае лёд темнеет и распадается на «свечки»: длинные вертикальные кристаллы звенят, когда сталкиваются. Ходить по такому льду опасно, зато зрелище уникальное.'],
+['Лето','Вода у поверхности в открытом озере остаётся холодной, но в мелких заливах прогревается до +20. Время для походов по Большой Байкальской тропе и каяков.'],
+['Осень','Тихие дни, золото лиственниц и осенний ход омуля. Туристов мало, а закаты над горами на другом берегу самые длинные.']];
+let zi=0;function rz(){$('#tb').innerHTML=Z.map((z,i)=>`<button class="tab" role="tab" aria-selected="${i===zi}" data-i="${i}">${z[0]}</button>`).join('');$('#tp').innerHTML=`<h3>${Z[zi][0]}</h3><p style="margin:0">${Z[zi][1]}</p>`}
+$('#tb').onclick=e=>{const b=e.target.closest('.tab');if(b){zi=+b.dataset.i;rz()}};rz();
+
+/* вода */
+function cw(){const l=+$('#rg').value,y=2.9e6/l/365;$('#lv').textContent=l;$('#yr').textContent=Math.round(y).toLocaleString('ru-RU')+' лет';$('#cm').textContent=y>=80?'Это дольше средней человеческой жизни примерно в '+(y/80).toFixed(0)+' раз.':'Это почти вся жизнь.'}
+$('#rg').oninput=cw;cw();
+
+/* викторина */
+const Q=[['Какая река вытекает из Байкала?',['Лена','Ангара','Енисей'],1],['Как называется крупнейший остров озера?',['Ольхон','Святой Нос','Большой Ушканий'],0],
+['Какой тюлень живёт только в Байкале?',['Нерпа','Морской котик','Гренландский тюлень'],0],['Какова максимальная глубина Байкала?',['642 м','1642 м','3642 м'],1],['В каком году Байкал внесли в список ЮНЕСКО?',['1978','1996','2008'],1],
+['Как называется сильнейший ветер Байкала?',['Сарма','Култук','Баргузин'],0],['Из какого города чаще всего начинают поездку к южному Байкалу?',['Красноярск','Иркутск','Новосибирск'],1],
+['Чем в основном питается нерпа?',['Водорослями','Рыбой','Птицами'],1],['Что такое «свечки» на Байкале?',['Вертикальные кристаллы льда','Маяки на берегу','Сорт омуля'],0],
+['Какую долю мировой неледниковой пресной воды хранит Байкал?',['5%','20%','50%'],1]];
+let qi=0,sc=0;
+function qr(){const b=$('#qb');if(qi>=Q.length){b.innerHTML=`<p class="big">${sc} из ${Q.length}</p><p>${sc>=8?'Вы почти байкальский старожил.':'Перечитайте разделы выше и попробуйте снова.'}</p><button class="opt" id="rr">Пройти заново</button>`;$('#rr').onclick=()=>{qi=sc=0;Q.sort(()=>Math.random()-.5);qr()};return}
+const q=Q[qi];b.innerHTML=`<p><b>Вопрос ${qi+1} из ${Q.length}.</b> ${q[0]}</p>`+q[1].map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('');
+b.onclick=e=>{const o=e.target.closest('.opt');if(!o||b.dataset.l||o.id)return;b.dataset.l=1;if(+o.dataset.i===q[2]){sc++;o.classList.add('ok')}else{o.classList.add('no');b.children[q[2]+1].classList.add('ok')}
+setTimeout(()=>{delete b.dataset.l;qi++;qr()},1100)}}
+qr();
+
+/* маршрут */
+const R=['Листвянка и Байкальский музей: знакомство с озером в часе езды от Иркутска.','Кругобайкальская железная дорога: тоннели и мосты вдоль берега.','Ольхон, посёлок Хужир и мыс Бурхан со скалой Шаманка.','Малое Море: тёплые заливы и пески.','Баргузинский заповедник: тайга, соболь и тишина.'];
+$('#st').innerHTML=R.map((r,i)=>`<label class="st"><input type="checkbox" data-i="${i}"><span>${r}</span></label>`).join('');
+/* случайный факт */
+const P=[...F.map(f=>f[0]+': '+f[1]),...A.map(a=>a[0]+'. '+a[2])];
+$('#rf').onclick=()=>{$('#rt').textContent=P[Math.random()*P.length|0]};
+
+/* ветры */
+const V=[['Баргузин','северо-востока',45,'Попутный ветер для парусников: идёт вдоль озера и несёт лодки на юг. О нём поётся в старой народной песне.'],
+['Култук','юго-запада',225,'Дует от южной оконечности озера вдоль всей его длины и поднимает волну.'],
+['Сарма','северо-запада',315,'Самый сильный ветер Байкала: порывы у Ольхона бывают сильнее 40 метров в секунду, а предупреждения о нём воспринимают всерьёз.'],
+['Верховик','севера',0,'Северный ветер, идущий вдоль озера от его верховьев, со стороны Верхней Ангары.']];
+let vi=0;function rv(){$('#wn').innerHTML=V.map((v,i)=>`<button class="chip" aria-pressed="${i===vi}" data-i="${i}">${v[0]}</button>`).join('');
+$('#wp').innerHTML=`<span class="ar" style="transform:rotate(${V[vi][2]}deg)">↑</span><h3>${V[vi][0]}</h3><p style="margin:0 0 8px"><b>Дует с ${V[vi][1]}.</b></p><p style="margin:0">${V[vi][3]}</p>`}
+$('#wn').onclick=e=>{const b=e.target.closest('.chip');if(b){vi=+b.dataset.i;rv()}};rv();
+
+/* история */
+const H=[['1643','Землепроходец Курбат Иванов первым из русских вышел к озеру и описал его.'],['1904–1905','Построена Кругобайкальская железная дорога, самый сложный участок Транссиба.'],['1916','Создан Баргузинский заповедник, один из первых заповедников страны.'],['1966','Запущен Байкальский целлюлозно-бумажный комбинат, споры о нём шли десятилетиями.'],['1996','Озеро получает статус объекта Всемирного наследия ЮНЕСКО.'],['2008–2010','Глубоководные аппараты «Мир» погружаются на дно Байкала ради научных исследований.'],['2013','Целлюлозно-бумажный комбинат на берегу остановлен.']];
+$('#hs').innerHTML=H.map(h=>`<p><b>${h[0]}</b><br>${h[1]}</p>`).join('');
+
+/* словарь */
+const G=[['Култук','Ветер с юго-запада, а также посёлок у южной оконечности озера.'],['Сарма','Сильнейший ветер Байкала, названный по долине реки Сармы.'],['Хужир','Главный посёлок острова Ольхон.'],['Торосы','Нагромождения льдин, вставших на ребро при подвижках льда.'],['Свечки','Вертикальные кристаллы льда весной: тающий лёд распадается на тонкие стержни.'],['Шаманка','Скала на мысе Бурхан, священное место для бурят.'],['Эндемик','Вид, который живёт только в одном месте и нигде больше.'],['Прибайкалье','Земли вокруг озера, а к востоку от него начинается Забайкалье.'],['Нерпа','Байкальский тюлень, единственный пресноводный тюлень в мире.']];
+function rg(){const q=$('#gq').value.trim().toLowerCase(),r=G.filter(g=>(g[0]+' '+g[1]).toLowerCase().includes(q));
+$('#gl').innerHTML=r.length?r.map(g=>`<div class="gi"><b>${g[0]}</b><br>${g[1]}</div>`).join(''):'<p class="lead">Ничего не найдено. Попробуйте другое слово.</p>'}
+$('#gq').oninput=rg;rg();
+
+/* рюкзак */
+const K=[['Зима',['Термобельё и пуховик','Накладки-шипы на обувь для льда','Солнцезащитные очки: лёд даёт сильные блики','Термос с горячим чаем']],
+['Весна',['Непромокаемая обувь','Тёплый слой на случай ветра','Солнцезащитный крем','Запасные носки']],
+['Лето',['Репеллент, а одежду проверяйте на клещей','Дождевик','Удобная трекинговая обувь','Купальник и полотенце для тёплых заливов']],
+['Осень',['Тёплая куртка','Шапка и перчатки','Налобный фонарь: темнеет рано','Бутылка с водой']]];
+let ki=0;function rk(){$('#kt').innerHTML=K.map((k,i)=>`<button class="chip" aria-pressed="${i===ki}" data-i="${i}">${k[0]}</button>`).join('');
+$('#kl').innerHTML=K[ki][1].map(s=>`<label class="st"><input type="checkbox"><span>${s}</span></label>`).join('');$('#kp').style.width='0'}
+$('#kt').onclick=e=>{const b=e.target.closest('.chip');if(b){ki=+b.dataset.i;rk()}};
+$('#kl').onchange=()=>{$('#kp').style.width=document.querySelectorAll('#kl input:checked').length/K[ki][1].length*100+'%'};rk();
+
+/* схема */
+const M=[['Култук',55,398,1,'Рядом Слюдянка, откуда идут поезда по Кругобайкальской железной дороге. Здесь же рождается ветер с юго-запада, давший название Култуку.'],['Листвянка',74,308,0,'Ближайший к Иркутску посёлок на берегу, у истока Ангары. Здесь Байкальский музей, а рядом Шаманский камень.'],['Ольхон',118,232,0,'Крупнейший остров озера, около 70 км в длину. Главный посёлок Хужир, мыс Бурхан и скала Шаманка.'],['Селенга',112,338,1,'Крупнейшая река, впадающая в Байкал. Её дельта работает как природный фильтр для озера.'],['Баргузинский залив',182,196,1,'Самый большой залив озера. Рядом одноимённый заповедник, где охраняют баргузинского соболя.'],['Северобайкальск',240,36,1,'Город на северном берегу, построенный вместе с БАМом.']];
+$('#pts').innerHTML=M.map((p,i)=>`<g data-i="${i}" tabindex="0" role="button" aria-label="${p[0]}"><circle class="pt" cx="${p[1]}" cy="${p[2]}" r="9"/><text x="${p[1]+(p[3]?14:-14)}" y="${p[2]+5}" text-anchor="${p[3]?'start':'end'}" font-size="14" font-weight="700" fill="currentColor">${p[0]}</text></g>`).join('');
+$('#pi').innerHTML='<p class="lead" style="margin:0">Выберите точку на схеме.</p>';
+const sp=e=>{const g=e.target.closest('g[data-i]');if(g&&(e.type==='click'||e.key==='Enter')){const p=M[+g.dataset.i];$('#pi').innerHTML=`<h3>${p[0]}</h3><p style="margin:0">${p[4]}</p>`}};
+$('#pts').onclick=sp;$('#pts').onkeydown=sp;
+
+/* озёра */
+const L=[['Байкал',1642,31722,23615],['Танганьика',1470,32900,18900],['Верхнее',406,82100,12100],['Телецкое',325,223,40],['Ладожское',230,17700,838],['Онежское',127,9720,295]];
+const LM=[['Глубина','м',1],['Площадь','км²',2],['Объём','км³',3]];let li=0;
+function ro(){const m=LM[li],s=[...L].sort((a,b)=>b[m[2]]-a[m[2]]),mx=s[0][m[2]];
+$('#oc').innerHTML=LM.map((x,i)=>`<button class="chip" aria-pressed="${i===li}" data-i="${i}">${x[0]}</button>`).join('');
+$('#ob').innerHTML=s.map(l=>`<div class="cmp${l[0]==='Байкал'?' me':''}"><span>${l[0]}</span><i style="width:${Math.max(2,l[m[2]]/mx*100)}%"></i><b>${l[m[2]].toLocaleString('ru-RU')} ${m[1]}</b></div>`).join('')}
+$('#oc').onclick=e=>{const b=e.target.closest('.chip');if(b){li=+b.dataset.i;ro()}};ro();
+
+/* лёд */
+function ri(){const c=+$('#ir').value;$('#iv').textContent=c;$('#ij').textContent=c<10?'Лёд такой толщины не держит человека. Выходить нельзя.':c<20?'Человека обычно выдерживает, но на Байкале лёд обманчив: трещины, полыньи, течения. Только с проводником.':c<30?'Выдерживает группы пешеходов и снегоходы по проверенной трассе.':'Такая толщина обычно рассчитана на лёгковой автомобиль, но трассу должны проверять местные службы.'}
+$('#ir').oninput=ri;ri();
+
+/* игра */
+const E=['🦭','🐟','🦅','🐻','🧊','🌲'];let mc,mo,mm,ml;
+function ng(){mc=[...E,...E].sort(()=>Math.random()-.5);mo=[];mm=0;ml=0;$('#mv').textContent='Ходов: 0';$('#mg').innerHTML=mc.map((e,i)=>`<button class="mc" data-i="${i}" aria-label="Карточка">?</button>`).join('')}
+$('#mg').onclick=e=>{const b=e.target.closest('.mc');if(!b||ml||b.dataset.o||b.classList.contains('f'))return;b.textContent=mc[b.dataset.i];b.dataset.o=1;mo.push(b);if(mo.length<2)return;mm++;$('#mv').textContent='Ходов: '+mm;const[x,y]=mo;
+if(mc[x.dataset.i]===mc[y.dataset.i]){x.classList.add('f');y.classList.add('f');mo=[];if(document.querySelectorAll('.mc.f').length===12)$('#mv').textContent='Победа за '+mm+' ходов!'}
+else{ml=1;setTimeout(()=>{mo.forEach(c=>{c.textContent='?';delete c.dataset.o});mo=[];ml=0},800)}};
+$('#mn').onclick=ng;ng();
+
+/* заметки */
+try{$('#nt').value=localStorage.getItem('bk')||''}catch(e){}
+$('#nt').oninput=()=>{try{localStorage.setItem('bk',$('#nt').value)}catch(e){}};
+
+$('#st').onchange=()=>{$('#pg').style.width=document.querySelectorAll('#st input:checked').length/R.length*100+'%'};
+</script>
+</body>
+</html>
